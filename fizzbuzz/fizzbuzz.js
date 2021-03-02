@@ -35,7 +35,7 @@ process.exitCode = (function (args) {
 
     if (fizzBuzzCount < 1)
     {
-        writeErr("Number to count up to must be greather than or equal to one.\n");
+        writeErr("Number to count up to must be greater than or equal to one.\n");
         result = 1;
     }
 

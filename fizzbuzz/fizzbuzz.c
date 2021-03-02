@@ -109,7 +109,7 @@ int main(int argc, const char** argv)
 
     if (fzCount < 1)
     {
-        fprintf(stderr, "Number to count up to must be greather than or equal to one.\n");
+        fprintf(stderr, "Number to count up to must be greater than or equal to one.\n");
         result = 1;
     }
 

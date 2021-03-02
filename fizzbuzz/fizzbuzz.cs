@@ -82,7 +82,7 @@ namespace FizzBuzz
         {
             if (NumberOfFizzBuzz < 1)
                 throw new InvalidOperationException(
-                    "Number to count up to must be greather than or equal to one.");
+                    "Number to count up to must be greater than or equal to one.");
 
             FizzBuzzFlags fbFlags = FizzBuzzFlags.None;
 
