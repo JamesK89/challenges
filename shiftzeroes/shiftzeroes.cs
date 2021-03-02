@@ -75,20 +75,22 @@ namespace ShiftZeroes
                 throw new InvalidOperationException(
                     "Nothing to shift.");
 
-            int src_index = 0;
-            int dst_index = 0;
+            int src_index = Numbers.Length - 1;
+            int dst_index = Numbers.Length - 1;
 
-            for (src_index = 0; src_index < Numbers.Length; src_index++)
+            while (src_index >= 0)
             {
-                if (Numbers[src_index] == 0)
+                if (Numbers[src_index] != 0)
                 {
-                    for (int i = src_index; i > dst_index; i--)
-                    {
-                        Numbers[i] = Numbers[i - 1];
-                    }
-
-                    Numbers[dst_index++] = 0;
+                    Numbers[dst_index--] = Numbers[src_index];
                 }
+
+                src_index--;
+            }
+
+            while (dst_index >= 0)
+            {
+                Numbers[dst_index--] = 0;
             }
 
             Array.ForEach(Numbers, (n) => Console.WriteLine(n.ToString()));

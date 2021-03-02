@@ -31,20 +31,22 @@ process.exitCode = (function (args) {
 
     if (result === 0)
     {
-        let src_index = 0;
-        let dst_index = 0;
+        let src_index = arrayToShift.length - 1;
+        let dst_index = arrayToShift.length - 1;
 
-        for (src_index = 0; src_index < arrayToShift.length; src_index++)
+        while (src_index >= 0)
         {
-            if (arrayToShift[src_index] == 0)
+            if (arrayToShift[src_index] != 0)
             {
-                for (let i = src_index; i > dst_index; i--)
-                {
-                    arrayToShift[i] = arrayToShift[i - 1];
-                }
-
-                arrayToShift[dst_index++] = 0;
+                arrayToShift[dst_index--] = arrayToShift[src_index];
             }
+
+            src_index--;
+        }
+
+        while (dst_index >= 0)
+        {
+            arrayToShift[dst_index--] = 0;
         }
 
         arrayToShift.forEach(

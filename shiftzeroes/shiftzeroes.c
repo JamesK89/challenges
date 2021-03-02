@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <limits.h>
+#include <string.h>
 
 #ifndef TRUE
 #   define TRUE 1
@@ -155,17 +156,22 @@ int main(int argc, const char** argv)
 
     if (result == 0)
     {
-        for (src_index = 0; src_index < numNumbers; src_index++)
-        {
-            if (numbers[src_index] == 0)
-            {
-                for (i = src_index; i > dst_index; i--)
-                {
-                    numbers[i] = numbers[i - 1];
-                }
+        src_index = numNumbers - 1;
+        dst_index = numNumbers - 1;
 
-                numbers[dst_index++] = 0;
+        while (src_index >= 0)
+        {
+            if (numbers[src_index] != 0)
+            {
+                numbers[dst_index--] = numbers[src_index];
             }
+
+            src_index--;
+        }
+        
+        while (dst_index >= 0)
+        {
+            numbers[dst_index--] = 0;
         }
 
         for (i = 0; i < numNumbers; i++)
