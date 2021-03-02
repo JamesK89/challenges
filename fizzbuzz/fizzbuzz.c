@@ -21,6 +21,10 @@
 #   define FALSE 0
 #endif
 
+#define IVN_STATE_SIGN        0
+#define IVN_STATE_DIGIT       1
+#define IVN_STATE_EXIT        2
+
 int is_valid_number(const char* str)
 {
     const char* pStr = str;
@@ -28,18 +32,51 @@ int is_valid_number(const char* str)
     int result = 
         str && *str != '\0' ? TRUE : FALSE;
 
+    int state = IVN_STATE_SIGN;
+
+    int numDigits = 0;
+
     if (result)
     {
-        while (*pStr != '\0')
+        while (state != IVN_STATE_EXIT && 
+            *pStr != '\0')
         {
-            if (!isdigit(*pStr))
+            switch (state)
             {
-                result = FALSE;
+                case IVN_STATE_SIGN:
+                    if (*pStr == '-' || 
+                        *pStr == '+' ||
+                        isdigit(*pStr))
+                    {
+                        state = IVN_STATE_DIGIT;
+
+                        if (isdigit(*pStr))
+                            pStr--;
+                    }
+                    else
+                    {
+                        result = FALSE;
+                        state = IVN_STATE_EXIT;
+                    }
+                break;
+                case IVN_STATE_DIGIT:
+                    if (!isdigit(*pStr))
+                    {
+                        result = FALSE;
+                        state = IVN_STATE_EXIT;
+                    }
+                    else
+                    {
+                        numDigits++;
+                    }
                 break;
             }
 
             pStr++;
         }
+
+        if (numDigits < 1)
+            result = FALSE;
     }
 
     return result;
