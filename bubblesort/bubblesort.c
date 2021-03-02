@@ -162,6 +162,9 @@ int main(int argc, const char** argv)
             {
                 if (numbers[i + 1] < numbers[i])
                 {
+                    // XOR swap algorithm.
+                    // I think this would not be practical to use in real world applications
+                    // but it is just too cool not to demonstrate in this particular case.
                     numbers[i] = numbers[i + 1] ^ numbers[i];
                     numbers[i + 1] = numbers[i] ^ numbers[i + 1];
                     numbers[i] = numbers[i + 1] ^ numbers[i];
