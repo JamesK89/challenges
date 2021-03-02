@@ -80,6 +80,9 @@ int get_numbers(int numValues, const char** values, int** numbers)
     int err = FALSE;
     int i, j;
 
+    if (numbers)
+        *numbers = NULL;
+
     if (values && numValues && numbers)
     {
         for (i = 0; i < numValues; i++)
@@ -98,14 +101,22 @@ int get_numbers(int numValues, const char** values, int** numbers)
         if (!err && result)
         {
             *numbers = (int*)malloc(sizeof(int) * result);
-            j = 0;
 
-            for (i = 0; i < numValues; i++)
+            if (numbers)
             {
-                if (is_valid_number(values[i]))
+                j = 0;
+
+                for (i = 0; i < numValues; i++)
                 {
-                    (*numbers)[j++] = strtol(values[i], NULL, 10);
+                    if (is_valid_number(values[i]))
+                    {
+                        (*numbers)[j++] = strtol(values[i], NULL, 10);
+                    }
                 }
+            }
+            else
+            {
+                result = RET_ERROR;
             }
         }
         else if (err)
